@@ -8,9 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText editText;
-    private Button button;
-    private TextView textView;
+    private EditText searchField;
+    private Button searchButton;
+    private TextView result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

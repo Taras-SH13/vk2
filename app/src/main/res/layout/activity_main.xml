@@ -14,7 +14,7 @@
         android:paddingBottom="10dp">
 
         <EditText
-            android:id="@+id/et_serch_fild"
+            android:id="@+id/et_search_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/insert_id_here"
@@ -24,7 +24,7 @@
 
         </EditText>
         <Button
-            android:id="@+id/b_serch_vc"
+            android:id="@+id/b_search_vc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/serch">
