@@ -11,10 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        >
 <EditText
-    android:layout_width=""
-    android:layout_height="">
+    android:id="@+id/et_serch_fild"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:hint="Insert ID here"
+    android:inputType="text">
     
 </EditText>
     </LinearLayout>
