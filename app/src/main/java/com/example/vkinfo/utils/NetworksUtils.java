@@ -2,9 +2,13 @@ package com.example.vkinfo.utils;
 
 import android.net.Uri;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.Scanner;
 
 public class NetworksUtils {
 
@@ -29,6 +33,22 @@ public class NetworksUtils {
             e.printStackTrace();
         }
         return url;
+    }
+    public static String getResponseFromURL(URL url) throws IOException {
+        HttpURLConnection urlConnection=(HttpURLConnection) url.openConnection();
+        try {
+            InputStream in = urlConnection.getInputStream();
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A"); // трюк для удобного считывания данных целой строкой
+            boolean hasInput = scanner.hasNext();
+            if (hasInput) {
+                return scanner.next();
+            } else {
+                return null;
+            }
+        } finally {
+            urlConnection.disconnect();
+        }
     }
 
 
