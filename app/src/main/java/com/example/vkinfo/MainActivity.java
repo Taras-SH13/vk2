@@ -2,6 +2,7 @@ package com.example.vkinfo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,25 +21,34 @@ public class MainActivity extends AppCompatActivity {
     private Button searchButton;
     private TextView result;
 
+    class VkQueryTask extends AsyncTask<URL, Void, String> {
+
+        @Override
+        protected String doInBackground(URL... urls) {
+            String response = null;
+            try {
+                response = getResponseFromURL(urls[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        searchField=findViewById(R.id.et_search_field);
-        searchButton=findViewById(R.id.b_search_vc);
-        result=findViewById(R.id.tv_result);
+        searchField = findViewById(R.id.et_search_field);
+        searchButton = findViewById(R.id.b_search_vc);
+        result = findViewById(R.id.tv_result);
 
-        View.OnClickListener onClickListener=new View.OnClickListener() {
+        View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                URL generatedURL=generateURL(searchField.getText().toString());
-                String response=null;
-                try {
-                    response=getResponseFromURL(generatedURL);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                URL generatedURL = generateURL(searchField.getText().toString());
+
                 result.setText(response);
             }
         };
