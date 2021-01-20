@@ -20,7 +20,7 @@ public class NetworksUtils {
 
 
     public static URL generateURL(String userId) {
-        Uri builUri = Uri.parse(VK_API_BASE_URL + VK_USERS_GET)
+        Uri buildUri = Uri.parse(VK_API_BASE_URL + VK_USERS_GET)
                 .buildUpon()
                 .appendQueryParameter(PARAM_USER_ID, userId)
                 .appendQueryParameter(PARAM_ACCESS_TOKEN,"d8420fa36da4f5821dc99faa9f0b5f7054fe7fef04938bfe8ae9fdaf91742386a7a4894e45cbbb7d78cce")
@@ -28,7 +28,7 @@ public class NetworksUtils {
                 .build();
         URL url = null;
         try {
-            url = new URL(builUri.toString());
+            url = new URL(buildUri.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
