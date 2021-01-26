@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText searchField;
     private Button searchButton;
     private TextView result;
-    private TextView genQuery;
+
 
     class VkQueryTask extends AsyncTask<URL, Void, String> {
 
@@ -49,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
         searchField = findViewById(R.id.et_search_field);
         searchButton = findViewById(R.id.b_search_vc);
         result = findViewById(R.id.tv_result);
-        genQuery = findViewById(R.id.tv_query);
+
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 URL generatedURL = generateURL(searchField.getText().toString());
-                genQuery.setText(generatedURL.toString());
+
                 new VkQueryTask().execute(generatedURL);
             }
         };
