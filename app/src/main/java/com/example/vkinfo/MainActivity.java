@@ -24,7 +24,17 @@ public class MainActivity extends AppCompatActivity {
     private EditText searchField;
     private Button searchButton;
     private TextView result;
+    private TextView errorMessage;
 
+    private void shouResultTextView() {
+        result.setVisibility(View.VISIBLE);
+        errorMessage.setVisibility(View.INVISIBLE);
+    }
+
+    private void shouErrorTextView() {
+        result.setVisibility(View.INVISIBLE);
+        errorMessage.setVisibility(View.VISIBLE);
+    }
 
     class VkQueryTask extends AsyncTask<URL, Void, String> {
 
@@ -43,18 +53,22 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String response) {
             String firstName = null;
             String lastName = null;
-            try {
-                JSONObject jsonResponse = new JSONObject(response);
-                JSONArray jsonArray = jsonResponse.getJSONArray("response");
-                JSONObject userInfo = jsonArray.getJSONObject(0);
-                firstName = userInfo.getString("first_name");
-                lastName = userInfo.getString("last_name");
+            if (response != null && !response.equals("")) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    JSONArray jsonArray = jsonResponse.getJSONArray("response");
+                    JSONObject userInfo = jsonArray.getJSONObject(0);
+                    firstName = userInfo.getString("first_name");
+                    lastName = userInfo.getString("last_name");
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String resultingString = "Name: " + firstName + "\n" + "Last Name: " + lastName;
+                result.setText(resultingString);
+                shouResultTextView();
+            }else {shouErrorTextView();
             }
-            String resultingString = "Name: " + firstName + "\n" + "Last Name: " + lastName;
-            result.setText(resultingString);
         }
     }
 
@@ -66,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         searchField = findViewById(R.id.et_search_field);
         searchButton = findViewById(R.id.b_search_vc);
         result = findViewById(R.id.tv_result);
+        errorMessage = findViewById(R.id.tv_error_message);
 
 
         View.OnClickListener onClickListener = new View.OnClickListener() {

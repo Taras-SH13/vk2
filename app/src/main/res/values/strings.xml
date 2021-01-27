@@ -3,4 +3,5 @@
     <string name="insert_id_here">Insert ID here</string>
     <string name="serch">Serch!!!</string>
     <string name="result">Result</string>
+    <string name="error_message">Error! Try again</string>
 </resources>

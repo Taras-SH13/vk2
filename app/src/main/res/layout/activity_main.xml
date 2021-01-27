@@ -23,6 +23,7 @@
             android:textSize="25sp">
 
         </EditText>
+
         <Button
             android:id="@+id/b_search_vc"
             android:layout_width="wrap_content"
@@ -32,12 +33,37 @@
         </Button>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/result">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    </TextView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_padding">
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/result"
+                android:textSize="22sp"
+                android:visibility="invisible">
+
+            </TextView>
+        </ScrollView>
+<TextView
+    android:id="@+id/tv_error_message"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="22sp"
+    android:padding="16dp"
+    android:text="@string/error_message"
+    android:visibility="invisible">
+
+</TextView>
+
+    </FrameLayout>
+
 
 </LinearLayout>
