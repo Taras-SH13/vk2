@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private Button searchButton;
     private TextView result;
     private TextView errorMessage;
+    private ProgressBar loadingIndicator;
 
     private void shouResultTextView() {
         result.setVisibility(View.VISIBLE);
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class VkQueryTask extends AsyncTask<URL, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            loadingIndicator.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected String doInBackground(URL... urls) {
@@ -69,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 shouResultTextView();
             }else {shouErrorTextView();
             }
+            loadingIndicator.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -81,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.b_search_vc);
         result = findViewById(R.id.tv_result);
         errorMessage = findViewById(R.id.tv_error_message);
+        loadingIndicator=findViewById(R.id.pb_loading_indicator);
 
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
