@@ -59,21 +59,27 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String response) {
             String firstName = null;
             String lastName = null;
+            String resultingString="";
             if (response != null && !response.equals("")) {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray jsonArray = jsonResponse.getJSONArray("response");
-                    JSONObject userInfo = jsonArray.getJSONObject(0);
-                    firstName = userInfo.getString("first_name");
-                    lastName = userInfo.getString("last_name");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject userInfo = jsonArray.getJSONObject(i);
+                        firstName = userInfo.getString("first_name");
+                        lastName = userInfo.getString("last_name");
+                        resultingString += "Name: " + firstName + "\n" + "Last Name: " + lastName+"\n\n";
+                    }
+                    result.setText(resultingString);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                String resultingString = "Name: " + firstName + "\n" + "Last Name: " + lastName;
-                result.setText(resultingString);
+
+
                 shouResultTextView();
-            }else {shouErrorTextView();
+            } else {
+                shouErrorTextView();
             }
             loadingIndicator.setVisibility(View.INVISIBLE);
         }
@@ -88,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.b_search_vc);
         result = findViewById(R.id.tv_result);
         errorMessage = findViewById(R.id.tv_error_message);
-        loadingIndicator=findViewById(R.id.pb_loading_indicator);
+        loadingIndicator = findViewById(R.id.pb_loading_indicator);
 
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
